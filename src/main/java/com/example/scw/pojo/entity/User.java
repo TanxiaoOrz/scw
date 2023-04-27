@@ -6,6 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "用户存储实体")
 public class User {
 
+    public final static String TYPE_TEACHER = "teacher";
+    public final static String TYPE_STUDENT = "student";
+
     @ApiModelProperty("用户唯一id")
     private Integer userId;
     @ApiModelProperty("学号或教师编号")
@@ -15,7 +18,7 @@ public class User {
     @ApiModelProperty("用户密码")
     private String userPass;
     @ApiModelProperty("用户类型")
-    private String userStatus;
+    private String userType;
 
     public Integer getUserId() {
         return userId;
@@ -49,12 +52,12 @@ public class User {
         this.userPass = userPass;
     }
 
-    public String getUserStatus() {
-        return userStatus;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
 }

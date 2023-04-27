@@ -3,7 +3,7 @@ package com.example.scw.pojo.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "登录结构体")
+@ApiModel(value = "UserLogin",description = "登录结构体")
 public class UserLogin {
 
     @ApiModelProperty("学号或教师编号")
