@@ -30,7 +30,20 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(new LoginCheck())
                 .addPathPatterns("/user/**")
+                .addPathPatterns("/team/configGet")
                 .excludePathPatterns("/user/login")
+                .excludePathPatterns("/favicon.ico")
+                .excludePathPatterns("file")
+                .excludePathPatterns("/swagger-ui.html/**",
+                        "/swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/v2/api-docs",
+                        "/v3/api-docs",
+                        "/v3/api-docs/swagger-config",
+                        "/webjars/**",
+                        "/doc.html");
+        registry.addInterceptor(new TeacherCheck())
+                .addPathPatterns("/team/configUpdate")
                 .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("file")
                 .excludePathPatterns("/swagger-ui.html/**",
