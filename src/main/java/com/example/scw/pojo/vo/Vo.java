@@ -16,7 +16,7 @@ public class Vo<Value> {
     // 错误的数据存储
     public static final int WRONG_DATA_STORE = 4;
     // 运行异常
-    public static final int SEVEVE_ERROR = 5;
+    public static final int SERVER_ERROR = 5;
     // 基本的描述信息存储
     public static final String[] DESCRIPTIONS = {
             "正常返回",

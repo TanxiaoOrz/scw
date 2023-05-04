@@ -20,6 +20,6 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     public Vo<String> handleException(Exception e) {
         e.printStackTrace();
-        return new Vo<>(Vo.SEVEVE_ERROR, e.getMessage());
+        return new Vo<>(Vo.SERVER_ERROR, e.getMessage());
     }
 }
