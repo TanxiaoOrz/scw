@@ -1,0 +1,24 @@
+team:
+  count: 5
+  memberName:
+    - 小队长
+    - 质量经理
+    - 开发经理
+    - 产品经理
+    - 测试经理
+    - 无
+    - 无
+    - 无
+
+file:
+  request-ip: "http://127.0.0.1"
+  type-path:
+    - "study_work/resource"
+    - "team_work/resource"
+    - "single_work/resource"
+    - "team_work/production"
+    - "single_work/production"
+
+config:
+  work-id: 15
+  data-center-id: 30
