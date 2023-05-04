@@ -23,6 +23,7 @@ CREATE TABLE `scw`.`not_to_user` (
 CREATE TABLE `scw`.`team` (
   `TeamId` INT NOT NULL,
   `TeamStatus` INT NULL,
+  `TeamLeader` INT NULL ,
   `TeamMember1` INT NULL,
   `TeamMember2` INT NULL,
   `TeamMember3` INT NULL,
