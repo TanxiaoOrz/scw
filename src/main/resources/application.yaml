@@ -12,12 +12,7 @@ team:
 
 file:
   request-ip: "http://127.0.0.1"
-  type-path:
-    - "study_work/resource"
-    - "team_work/resource"
-    - "single_work/resource"
-    - "team_work/production"
-    - "single_work/production"
+  type-path: study_work/resource,team_work/resource,single_work/resource,team_work/production,single_work/production
 
 config:
   work-id: 15
