@@ -25,7 +25,7 @@ public class WorkController {
     WorkService workService;
 
     @PostMapping("/study/create")
-    @ApiOperation(value = "教师创建学习任务的接口")
+    @ApiOperation(value = "教师创建学习任务的接口，创建时id设置为0即可")
     @ApiImplicitParam(name = "studyWork",value = "学习任务结构体",required = true,dataTypeClass = StudyWork.class,paramType = "body")
     public Vo<String> createStudyWork(@RequestBody StudyWork studyWork, HttpServletRequest request) throws ErrorException {
         User user =(User) request.getAttribute("User");
@@ -48,7 +48,7 @@ public class WorkController {
     }
 
     @GetMapping("/study/all")
-    @ApiOperation(value = "教师创建学习任务的接口")
+    @ApiOperation(value = "查看所有学习任务的接口")
     public Vo<List<StudyWork>> getStudyWorkAll() {
         return new Vo<>(workService.getStudyWorkAll());
     }
