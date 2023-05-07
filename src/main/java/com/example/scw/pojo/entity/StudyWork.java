@@ -115,8 +115,8 @@ public class StudyWork implements PojoCheck, ToCreateNotification {
     }
 
     @Override
-    public String getNotificationString() throws DataException {
-        String not;
+    public String createNotificationString() throws DataException {
+        String not = null;
         switch (status) {
             case 1:
                 not = String.format("%s,新的学习任务:%20s...,截至时间是%s",releaseTime.toString(),content,endTime.toString());
@@ -125,7 +125,7 @@ public class StudyWork implements PojoCheck, ToCreateNotification {
                 not = String.format("%s,学习任务:%20s...,已截止如有未提交请单独联系老师",endTime.toString(),content);
                 break;
             default:
-                throw new DataException("错误的学习任务状态码");
+                throw new DataException("错误的学习任务状态码调用生成通知");
         }
         return not;
     }

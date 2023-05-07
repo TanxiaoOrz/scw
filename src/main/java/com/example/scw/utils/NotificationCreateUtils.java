@@ -4,7 +4,6 @@ import com.example.scw.mapper.NotificationMapper;
 import com.example.scw.pojo.ToCreateNotification;
 import com.example.scw.pojo.entity.Notification;
 import com.example.scw.pojo.exception.DataException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +16,10 @@ public class NotificationCreateUtils {
     SnowFlakeUtils snowFlakeUtils;
 
     public boolean createNotification(ToCreateNotification notifyEntity, Integer publisher) throws DataException {
-        String content = notifyEntity.getNotificationString();
+        String content = notifyEntity.createNotificationString();
+        if (content == null) {
+            return false;
+        }
         Notification notification = new Notification();
         notification.setContent(content);
         notification.setPublisher(publisher);
