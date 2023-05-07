@@ -17,4 +17,7 @@ public interface WorkService {
 
     StudyWorkDto getStudyWorkConcrete(Integer id);
     List<StudyWork> getStudyWorkAll();
+
+    void scanWorkRelease();
+    void scanWorkEnd();
 }
