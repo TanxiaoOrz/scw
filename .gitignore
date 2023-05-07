@@ -33,3 +33,4 @@ build/
 .vscode/
 /log/spring.log
 /log/**
+/static/study_work/resource/
