@@ -16,26 +16,29 @@ public class FileServiceImpl implements FileService {
     @Value("${file.request-ip}")
     String requestIP;
 
+    @Value("${server.port}")
+    String port;
+
     String absolutePath = System.getProperty("user.dir") + "/static/";
 
     @Value("${file.type-path}")
-    List<String> typePath;
+    String[] typePath;
 
     @Override
     public String workResourceUpload(MultipartFile multipartFile, Integer object) throws ParameterException, IOException {
         if (object>4||object<0)
             throw new ParameterException("错误的上传类型选择");
-        File dir = new File(absolutePath+typePath.get(object));
+        File dir = new File(absolutePath+typePath[object]);
         if (!dir.exists())
             dir.mkdirs();
         File file = new File(dir,multipartFile.getOriginalFilename());
         int i = 0;
         while(file.exists()){
-            file = new File(dir,multipartFile.getOriginalFilename()+ Integer.toString(i));
+            file = new File(dir,multipartFile.getOriginalFilename()+ i);
         }
         file.createNewFile();
         multipartFile.transferTo(file);
-        return requestIP+typePath.get(object)+file.getName();
+        return requestIP+":"+port+"/static/"+typePath[object]+"/"+file.getName();
     }
 
     @Override
