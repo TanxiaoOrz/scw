@@ -10,11 +10,11 @@ import java.util.List;
 public interface WorkMapper {
 
     @Insert("insert into study_work (WorkId, Publisher, Content, ReleaseTime, EndTime, ResourceRoute, Status) " +
-            "VALUES (#{WorkId}, #{Publisher}, #{Content}, #{ReleaseTime}, #{EndTime}, #{ResourceRoute}, #{Status})")
+            "VALUES (#{workId}, #{publisher}, #{content}, #{releaseTime}, #{endTime}, #{resourceRoute}, #{status})")
     Integer newStudyWork(StudyWork studyWork);
 
-    @Update("update study_work set Publisher=#{Publisher}, Content=#{Content}, ReleaseTime=#{ReleaseTime}," +
-            " EndTime=#{EndTime}, ResourceRoute=#{EndTime}, Status=#{EndTime} where WorkId = #{WorkId}")
+    @Update("update study_work set Publisher=#{publisher}, Content=#{content}, ReleaseTime=#{releaseTime}," +
+            " EndTime=#{endTime}, ResourceRoute=#{resourceRoute}, Status=#{status} where WorkId = #{workId}")
     Integer modifyStudyWork(StudyWork studyWork);
 
     @Select("select * from study_work where WorkId = #{WorkId}")
@@ -24,8 +24,14 @@ public interface WorkMapper {
     List<StudyWork> getStudyWorkAll();
 
     @Insert("insert into team_work (TeamWorkId, BelongTeam, BelongWork, Status) " +
-            "VALUES (#{TeamWorkId}, #{BelongTeam}, #{BelongWork}, #{Status})")
+            "VALUES (#{teamWorkId}, #{belongTeam}, #{belongWork}, #{status})")
     Integer newTeamWork(TeamWork teamWork);
+
+    @Select("select * from study_work where ReleaseTime < now() and Status = 0")
+    List<StudyWork> getStudyWorKsToRelease();
+
+    @Select("select * from study_work where EndTime < now() and Status = 1")
+    List<StudyWork> getStudyWorKsToEnd();
 
     @Select("select * from team_work where TeamWorkId = #{TeamWorkId}")
     TeamWork getTeamWork(@Param("TeamWorkId")Integer teamWorkId);

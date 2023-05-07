@@ -12,4 +12,6 @@ public interface UserMapper {
     @Select("select * from scw.user where UserCode = #{UserCode} and UserPass = #{UserPass}")
     User getUserLogin(@Param("UserCode") String userCode, @Param("UserPass") String userPass);
 
+    @Select("select UserId from scw.user where UserType = 'teacher'")
+    Integer getTeacher();
 }
