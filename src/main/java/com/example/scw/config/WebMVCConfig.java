@@ -29,8 +29,9 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(new LoginCheck())
-                .addPathPatterns("/user/**")
+                .addPathPatterns("/user/information")
                 .addPathPatterns("/team/configGet")
+                .addPathPatterns("/work/study/all")
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("file")
@@ -44,6 +45,9 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
                         "/doc.html");
         registry.addInterceptor(new TeacherCheck())
                 .addPathPatterns("/team/configUpdate")
+                .addPathPatterns("/work/study/create")
+                .addPathPatterns("/work/study/modify")
+                .addPathPatterns("/work/study/concrete/*")
                 .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("file")
                 .excludePathPatterns("/swagger-ui.html/**",
@@ -68,9 +72,9 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 
 
-        //appConfig.getResPhysicalPath() 这表示项目所在的文件夹，下面会有介绍
+        //appConfig.getResPhysicalPath();    这表示项目所在的文件夹，下面会有介绍
 
-        //registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/","file:static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/","file:static/");
 
         super.addResourceHandlers(registry);
     }
@@ -102,7 +106,7 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
             String token = request.getHeader("token");
             User userByToken = userService.getUserByToken(token, User.TYPE_STUDENT);
             request.setAttribute("User",userByToken);
-            return true;
+            return userByToken!=null;
         }
 
         @Override
@@ -124,7 +128,7 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
             String token = request.getHeader("token");
             User userByToken = userService.getUserByToken(token, User.TYPE_TEACHER);
             request.setAttribute("User",userByToken);
-            return true;
+            return userByToken!=null;
         }
 
         @Override
@@ -146,7 +150,7 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
             String token = request.getHeader("token");
             User userByToken = userService.getUserByToken(token, null);
             request.setAttribute("User",userByToken);
-            return true;
+            return userByToken!=null;
         }
 
         @Override
