@@ -24,13 +24,10 @@ public class FileController {
     @PostMapping(value = "/work/resource/{type}")
     @ApiOperation(value = "图片或图片上传", notes = "图片或图片上传,返回填充在resourceRoute的访问url")
     // 此处的@RequestParam中的file名应与前端upload组件中的name的值保持一致
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "附带的资料文件",name = "file"),
-            @ApiImplicitParam(value = "对应的任务选项，0是学习任务附件，" +
+    @ApiImplicitParam(value = "对应的任务选项，0是学习任务附件，" +
                     "1是团队任务附件，2是个人任务附件，3是团队任务成品，4是个人任务成品"
                     ,name = "type",required = true,
                     dataTypeClass = Integer.class,paramType = "path")
-    })
     public Vo<String> upload(@RequestPart("file") MultipartFile multipartFile, @PathVariable Integer type) throws ParameterException, IOException {
         return new Vo<>(fileService.workResourceUpload(multipartFile,type));
     }
