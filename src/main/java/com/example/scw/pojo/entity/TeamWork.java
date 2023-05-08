@@ -1,15 +1,22 @@
 package com.example.scw.pojo.entity;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "TeamWork",description = "小组任务存储实体类")
+@ApiModel(value = "TeamWork", description = "小组任务存储实体类")
 public class TeamWork {
 
+    @ApiModelProperty(value = "唯一id")
     Integer teamWorkId;
+    @ApiModelProperty(value = "任务描述")
     String workDescription;
+    @ApiModelProperty(value = "成果提交的访问路径")
     String production;
+    @ApiModelProperty(value = "从属队伍id")
     Integer belongTeam;
+    @ApiModelProperty(value = "从属学习任务id")
     Integer belongWork;
+    @ApiModelProperty(value = "任务状态，0是未提交，1是已提交")
     Integer status;
 
     public Integer getTeamWorkId() {

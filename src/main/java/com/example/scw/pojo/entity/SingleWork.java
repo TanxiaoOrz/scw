@@ -1,11 +1,21 @@
 package com.example.scw.pojo.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "SingleWork", description = "个人任务存储实体类")
 public class SingleWork {
+    @ApiModelProperty(value = "唯一id")
     private Integer singleWorkId;
+    @ApiModelProperty(value = "个人任务描述要求")
     private String workDescription;
+    @ApiModelProperty(value = "从属学生id")
     private Integer belongStudent;
+    @ApiModelProperty(value = "从属团队任务id")
     private Integer belongWork;
+    @ApiModelProperty(value = "成果路径")
     private String productionRoute;
+    @ApiModelProperty(value = "提交状态")
     private Integer Status;
 
     public Integer getSingleWorkId() {

@@ -42,7 +42,6 @@ public class WorkServiceImpl implements WorkService {
     @Autowired
     UserMapper userMapper;
 
-
     @Override
     @Transactional
     public String createStudyWork(StudyWork studyWork, User user) throws ErrorException {
@@ -51,10 +50,10 @@ public class WorkServiceImpl implements WorkService {
         }
         studyWork.setWorkId((int) snowFlakeUtils.nextId());
         Integer integer = workMapper.newStudyWork(studyWork);
-        if (integer!=1)
-            throw new ServerException("学习任务创建异常，数据库语句返回值"+integer);
+        if (integer != 1)
+            throw new ServerException("学习任务创建异常，数据库语句返回值" + integer);
         if (studyWork.getReleaseTime().before(new Date())) {
-            releaseStudyWork(studyWork,user);
+            releaseStudyWork(studyWork, user);
             return "创建并发布成功";
         }
         return "创建成功,等待发布";
@@ -67,13 +66,13 @@ public class WorkServiceImpl implements WorkService {
             throw new ParameterException("非完整学习任务属性上传");
         }
         StudyWork old = workMapper.getStudyWork(studyWork.getWorkId());
-        if (old.getStatus()==1&&studyWork.getStatus()==0)
+        if (old.getStatus() == 1 && studyWork.getStatus() == 0)
             throw new ParameterException("不能把已发布的学习任务设置成未发布");
         Integer integer = workMapper.modifyStudyWork(studyWork);
-        if (integer!=1)
-            throw new ServerException("学习任务修改异常，数据库语句返回值"+integer);
-        if (old.getStatus()==0&&studyWork.getStatus()==1) {
-            releaseStudyWork(studyWork,user);
+        if (integer != 1)
+            throw new ServerException("学习任务修改异常，数据库语句返回值" + integer);
+        if (old.getStatus() == 0 && studyWork.getStatus() == 1) {
+            releaseStudyWork(studyWork, user);
             return "修改并发布成功";
         }
         return "修改成功";
@@ -91,37 +90,35 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    @Scheduled(cron = "* * 0/2 * * ? *")
+    @Scheduled(cron = "* * 0/2 * * ?")
     public void scanWorkRelease() {
         List<StudyWork> studyWorKsToRelease = workMapper.getStudyWorKsToRelease();
-        for (StudyWork studyWork:
-             studyWorKsToRelease) {
+        for (StudyWork studyWork : studyWorKsToRelease) {
             studyWork.setStatus(1);
             try {
                 releaseStudyWork(studyWork);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     @Override
-    @Scheduled(cron = "* * 1/2 * * ? *")
+    @Scheduled(cron = "* * 1/2 * * ?")
     public void scanWorkEnd() {
         List<StudyWork> studyWorKsToRelease = workMapper.getStudyWorKsToRelease();
-        for (StudyWork studyWork:
-                studyWorKsToRelease) {
+        for (StudyWork studyWork : studyWorKsToRelease) {
             studyWork.setStatus(2);
             try {
                 endStudyWork(studyWork);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     private void releaseStudyWork(StudyWork studyWork, User user) throws ErrorException {
-        if (!notificationCreateUtils.createNotification(studyWork,user.getUserId()))
+        if (!notificationCreateUtils.createNotification(studyWork, user.getUserId()))
             throw new ServerException("学习任务通知创建失败");
         createTeamWork(studyWork);
     }
@@ -137,18 +134,15 @@ public class WorkServiceImpl implements WorkService {
             throw new ServerException("学习任务通知创建失败");
     }
 
-
-
     private void createTeamWork(StudyWork studyWork) throws ServerException {
         List<Integer> teamIdAll = teamMapper.getTeamIdAll();
-        for (Integer teamId:
-                teamIdAll) {
+        for (Integer teamId : teamIdAll) {
             TeamWork teamWork = new TeamWork();
             teamWork.setTeamWorkId((int) snowFlakeUtils.nextId());
             teamWork.setBelongTeam(teamId);
             teamWork.setBelongWork(studyWork.getWorkId());
             teamWork.setStatus(0);
-            if (1!=workMapper.newTeamWork(teamWork))
+            if (1 != workMapper.newTeamWork(teamWork))
                 throw new ServerException("队伍学习任务创建失败");
         }
     }

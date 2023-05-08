@@ -1,9 +1,17 @@
 package com.example.scw.pojo.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Comment", description = "评价存储实体类")
 public class Comment {
+    @ApiModelProperty(value = "唯一id，等于从属团队任务id")
     private Integer belongTeamWork;
+    @ApiModelProperty(value = "评价描述")
     private String description;
+    @ApiModelProperty(value = "评价分数")
     private Integer score;
+    @ApiModelProperty(value = "提交状态，0暂存，1提交")
     private Integer status;
 
     public Integer getBelongTeamWork() {
