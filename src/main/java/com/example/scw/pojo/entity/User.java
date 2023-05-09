@@ -19,6 +19,8 @@ public class User {
     private String userPass;
     @ApiModelProperty("用户类型")
     private String userType;
+    @ApiModelProperty("用户所在队伍")
+    private Integer userTeam;
 
     public Integer getUserId() {
         return userId;
@@ -60,4 +62,11 @@ public class User {
         this.userType = userType;
     }
 
+    public Integer getUserTeam() {
+        return userTeam;
+    }
+
+    public void setUserTeam(Integer userTeam) {
+        this.userTeam = userTeam;
+    }
 }

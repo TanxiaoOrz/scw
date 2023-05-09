@@ -6,6 +6,7 @@ CREATE TABLE `scw`.`user` (
   `UserName` VARCHAR(45) NULL,
   `UserPass` VARCHAR(45) NULL,
   `UserType` ENUM('teacher', 'student') NULL,
+  `UserTeam` Int NULL,
   PRIMARY KEY (`UserId`));
 
 CREATE TABLE `scw`.`notification` (
