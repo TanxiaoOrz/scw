@@ -10,6 +10,8 @@ public class Team {
     private Integer teamId;
     @ApiModelProperty("队伍状态")
     private Integer teamStatus;
+    @ApiModelProperty("队长")
+    private Integer teamLeader;
     @ApiModelProperty("队伍成员1")
     private Integer teamMember1;
     @ApiModelProperty("队伍成员2")
@@ -39,6 +41,14 @@ public class Team {
 
     public void setTeamStatus(Integer teamStatus) {
         this.teamStatus = teamStatus;
+    }
+
+    public Integer getTeamLeader() {
+        return teamLeader;
+    }
+
+    public void setTeamLeader(Integer teamLeader) {
+        this.teamLeader = teamLeader;
     }
 
     public Integer getTeamMember1() {

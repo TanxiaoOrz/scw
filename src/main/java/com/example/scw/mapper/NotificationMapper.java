@@ -14,4 +14,7 @@ public interface NotificationMapper {
     @Insert("insert into not_to_user (Notification, User, Status)  (select #{NotId},UserId,0 from user where UserType = 'student')")
     Integer linkAllStudent(@Param("NotId")Integer notId);
 
+    @Insert("insert into not_to_user (Notification, User, Status) values (#{NotId},#{UserId},0)")
+    Integer link(@Param("NotId")Integer notId,@Param("User")Integer userId);
+
 }

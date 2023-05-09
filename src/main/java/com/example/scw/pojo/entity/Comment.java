@@ -1,10 +1,12 @@
 package com.example.scw.pojo.entity;
 
+import com.example.scw.pojo.PojoCheck;
+import com.example.scw.pojo.exception.ParameterException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "Comment", description = "评价存储实体类")
-public class Comment {
+public class Comment implements PojoCheck {
     @ApiModelProperty(value = "唯一id，等于从属团队任务id")
     private Integer belongTeamWork;
     @ApiModelProperty(value = "评价描述")
@@ -44,5 +46,13 @@ public class Comment {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean checkValue() throws ParameterException {
+        if (belongTeamWork == null) {
+            return false;
+        }
+        return status != null;
     }
 }

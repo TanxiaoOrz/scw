@@ -1,9 +1,10 @@
 package com.example.scw.utils;
 
 import com.example.scw.mapper.TeamMapper;
+import com.example.scw.mapper.WorkMapper;
 import com.example.scw.pojo.dto.TeamConfigDto;
-import com.example.scw.pojo.entity.StudyWork;
-import com.example.scw.pojo.entity.Team;
+import com.example.scw.pojo.entity.*;
+import com.example.scw.pojo.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -48,11 +49,13 @@ public class TeamConfigUtils {
             "TeamMember5",
             "TeamMember6",
             "TeamMember7",
-
     };
 
     @Autowired
     TeamMapper teamMapper;
+
+    @Autowired
+    WorkMapper workMapper;
 
     public Integer getTeamMemberMax() {
         return teamMemberMax;
@@ -99,8 +102,43 @@ public class TeamConfigUtils {
         }
     }
 
+    public Integer getPublisherId(Integer userTeam, StudyWork studyWork) {
+        return teamMapper.getPublisherId(teamMemberStored[studyWork.getPublisher()],userTeam);
+    }
+
+    public Integer getPublisherId(TeamWork teamWork) {
+        return getPublisherId(teamWork.getBelongTeam(),workMapper.getStudyWork(teamWork.getBelongWork()));
+    }
+
+    public Integer getPublisherId(Integer userTeam, SingleWork singleWork) {
+        return getPublisherId(userTeam,workMapper.getStudyWork(workMapper.getTeamWork(singleWork.getBelongWork()).getBelongWork()));
+    }
+
+    public Integer getPublisherId(SingleWork singleWork) {
+        return getPublisherId(workMapper.getTeamWork(singleWork.getBelongWork()));
+    }
+
     public Integer getPublisherId(Team userTeam, StudyWork studyWork) {
-        return teamMapper.getPublisherId(teamMemberStored[studyWork.getPublisher()],userTeam.getTeamId());
+        switch (studyWork.getPublisher()) {
+            case 7:
+                return userTeam.getTeamMember7();
+            case 6:
+                return userTeam.getTeamMember6();
+            case 5:
+                return userTeam.getTeamMember5();
+            case 4:
+                return userTeam.getTeamMember4();
+            case 3:
+                return userTeam.getTeamMember3();
+            case 2:
+                return userTeam.getTeamMember2();
+            case 1:
+                return userTeam.getTeamMember1();
+            case 0:
+                return userTeam.getTeamLeader();
+            default:
+                return null;
+        }
     }
 
 }

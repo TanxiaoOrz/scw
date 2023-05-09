@@ -1,10 +1,14 @@
 package com.example.scw.pojo.entity;
 
+import com.example.scw.pojo.PojoCheck;
+import com.example.scw.pojo.ToCreateNotification;
+import com.example.scw.pojo.exception.DataException;
+import com.example.scw.pojo.exception.ParameterException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "TeamWork", description = "小组任务存储实体类")
-public class TeamWork {
+public class TeamWork implements PojoCheck, ToCreateNotification {
 
     @ApiModelProperty(value = "唯一id")
     Integer teamWorkId;
@@ -65,5 +69,26 @@ public class TeamWork {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean checkValue() {
+        if (teamWorkId == null) {
+            return false;
+        }
+        if (belongTeam == null)
+            return false;
+        if (belongWork == null) {
+            return false;
+        }
+        return status != null;
+    }
+
+    @Override
+    public String createNotificationString() throws DataException {
+        if (status == 1)
+            return String.format("团队%d的学习任务%d已完成提交请批阅，成果下载路径%s",belongTeam,belongWork,production);
+        else
+            throw new DataException("错误的团队任务状态码调用生成通知");
     }
 }

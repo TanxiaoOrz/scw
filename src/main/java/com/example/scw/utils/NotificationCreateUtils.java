@@ -17,9 +17,6 @@ public class NotificationCreateUtils {
 
     public boolean createNotification(ToCreateNotification notifyEntity, Integer publisher) throws DataException {
         String content = notifyEntity.createNotificationString();
-        if (content == null) {
-            return false;
-        }
         Notification notification = new Notification();
         notification.setContent(content);
         notification.setPublisher(publisher);
@@ -28,4 +25,16 @@ public class NotificationCreateUtils {
         notificationMapper.linkAllStudent(notification.getNotId());
         return integer == 1;
     }
+
+    public boolean createNotification(ToCreateNotification notifyEntity, Integer publisher, Integer listener) throws DataException {
+        String content = notifyEntity.createNotificationString();
+        Notification notification = new Notification();
+        notification.setContent(content);
+        notification.setPublisher(publisher);
+        notification.setNotId((int) snowFlakeUtils.nextId());
+        Integer integer = notificationMapper.newNotification(notification);
+        notificationMapper.link(notification.getNotId(),listener);
+        return integer == 1;
+    }
+
 }
