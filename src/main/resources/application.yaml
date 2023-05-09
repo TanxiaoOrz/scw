@@ -15,5 +15,5 @@ file:
   type-path: study_work/resource,team_work/resource,single_work/resource,team_work/production,single_work/production
 
 config:
-  work-id: 15
-  data-center-id: 30
+  work-id: 1
+  data-center-id: 1
