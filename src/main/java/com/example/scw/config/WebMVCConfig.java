@@ -32,6 +32,7 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
                 .addPathPatterns("/user/information")
                 .addPathPatterns("/team/configGet")
                 .addPathPatterns("/work/study/all")
+                .addPathPatterns("/notification/**")
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("file")
@@ -48,6 +49,19 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
                 .addPathPatterns("/work/study/create")
                 .addPathPatterns("/work/study/modify")
                 .addPathPatterns("/work/study/concrete/*")
+                .excludePathPatterns("/favicon.ico")
+                .excludePathPatterns("file")
+                .excludePathPatterns("/swagger-ui.html/**",
+                        "/swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/v2/api-docs",
+                        "/v3/api-docs",
+                        "/v3/api-docs/swagger-config",
+                        "/webjars/**",
+                        "/doc.html");
+        registry.addInterceptor(new StudentCheck())
+                .addPathPatterns("/work/team/**")
+                .addPathPatterns("/work/single/**")
                 .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("file")
                 .excludePathPatterns("/swagger-ui.html/**",
