@@ -22,7 +22,7 @@ public class TeamWorkFactory implements Factory<TeamWorkDto, TeamWork>{
         teamWorkDto.setStudyWork(workMapper.getStudyWork(teamWork.getBelongWork()));
         teamWorkDto.setSingleWorks(workMapper.getSingleWorkByTeamWork(teamWork.getTeamWorkId()));
         Comment comment = workMapper.getComment(teamWork.getTeamWorkId());
-        if (comment.getStatus()==1)
+        if (comment!=null && comment.getStatus()==1)
             teamWorkDto.setComment(comment);
         return teamWorkDto;
     }

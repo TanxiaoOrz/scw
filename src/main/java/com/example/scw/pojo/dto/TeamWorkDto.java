@@ -23,7 +23,8 @@ public class TeamWorkDto extends TeamWork {
     public TeamWorkDto(TeamWork teamWork) {
         setTeamWorkId(teamWork.getTeamWorkId());
         setWorkDescription(teamWork.getWorkDescription());
-        setProduction(teamWork.getProduction());
+        setProductionRoute(
+                teamWork.getProductionRoute());
         setBelongTeam(teamWork.getBelongTeam());
         setBelongWork(teamWork.getBelongWork());
         setStatus(teamWork.getStatus());

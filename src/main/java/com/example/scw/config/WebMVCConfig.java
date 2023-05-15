@@ -62,6 +62,7 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
         registry.addInterceptor(new StudentCheck())
                 .addPathPatterns("/work/team/**")
                 .addPathPatterns("/work/single/**")
+                .addPathPatterns("/team/student")
                 .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("file")
                 .excludePathPatterns("/swagger-ui.html/**",

@@ -3,6 +3,7 @@ package com.example.scw.controller;
 import com.example.scw.pojo.dto.TeamConfigDto;
 import com.example.scw.pojo.dto.TeamWorkDto;
 import com.example.scw.pojo.entity.Team;
+import com.example.scw.pojo.entity.User;
 import com.example.scw.pojo.exception.ParameterException;
 import com.example.scw.pojo.vo.Vo;
 import com.example.scw.service.TeamService;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 @CrossOrigin
 @RestController
@@ -37,8 +39,8 @@ public class TeamController {
 
     @GetMapping("/student")
     @ApiOperation(value = "获取所在团队信息")
-    public Vo<Team> getTeam(HttpServletRequest request) {
-        return null;
+    public Vo<Team> getTeam(@RequestAttribute(name = "User") @ApiIgnore User user) throws ParameterException {
+        return new Vo<>(teamService.getTeam(user));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.scw.mapper;
 
+import com.example.scw.pojo.entity.Team;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -14,4 +15,5 @@ public interface UserMapper {
 
     @Select("select UserId from scw.user where UserType = 'teacher'")
     Integer getTeacher();
+
 }

@@ -1,5 +1,6 @@
 package com.example.scw.controller;
 
+import com.example.scw.pojo.entity.Team;
 import com.example.scw.pojo.entity.User;
 import com.example.scw.pojo.exception.ParameterException;
 import com.example.scw.pojo.vo.Vo;
@@ -12,6 +13,7 @@ import com.example.scw.pojo.vo.UserLogin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +39,5 @@ public class UserController {
         User user = (User) request.getAttribute("User");
         return new Vo<>(user);
     }
-
 
 }

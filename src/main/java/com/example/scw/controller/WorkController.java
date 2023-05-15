@@ -107,6 +107,8 @@ public class WorkController {
         return new Vo<>(workService.modifyTeamWork(teamWork, type, user));
     }
 
+
+
     @PostMapping("/comment/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "comment", value = "学习任务结构体", required = true, dataTypeClass = Comment.class, paramType = "body"),
@@ -115,5 +117,15 @@ public class WorkController {
     @ApiOperation(value = "教师批阅提交的团队任务", notes = "生成描述，添加分数，完成批注")
     public Vo<String> modifyComment(@RequestBody Comment comment, @PathVariable Integer type) throws ErrorException {
         return new Vo<>(workService.modifyComment(comment, type));
+    }
+
+
+    @GetMapping("/comment/{teamworkID}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "teamworkID", value = "TeamWork的ID", required = true, dataTypeClass = Integer.class, paramType = "path")
+    })
+    @ApiOperation(value = "查看教师已批阅的团队任务", notes = "查看已批的任务")
+    public Vo<Comment> getComment(@PathVariable Integer teamworkID) throws ParameterException {
+        return new Vo<>(workService.getCommentedTeamwork(teamworkID));
     }
 }

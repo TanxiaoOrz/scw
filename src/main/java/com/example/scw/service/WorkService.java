@@ -5,10 +5,6 @@ import com.example.scw.pojo.dto.StudyWorkDto;
 import com.example.scw.pojo.dto.TeamWorkDto;
 import com.example.scw.pojo.entity.*;
 import com.example.scw.pojo.exception.*;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -33,5 +29,8 @@ public interface WorkService {
 
     void scanWorkRelease();
     void scanWorkEnd();
+
+    Comment getCommentedTeamwork(Integer TeamworkId) throws ParameterException;
+
 
 }

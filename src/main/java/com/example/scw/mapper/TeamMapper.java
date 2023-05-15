@@ -18,4 +18,7 @@ public interface TeamMapper {
 
     @Select("SELECT * from team where TeamId = #{TeamId}")
     Team getTeamOne(@Param("TeamId")Integer teamId);
+
+    @Select("select * from scw.team where TeamId = #{TeamID}")
+    Team getTeam(@Param("TeamID")Integer teamID);
 }

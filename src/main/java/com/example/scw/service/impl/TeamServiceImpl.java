@@ -1,6 +1,9 @@
 package com.example.scw.service.impl;
 
+import com.example.scw.mapper.TeamMapper;
 import com.example.scw.pojo.dto.TeamConfigDto;
+import com.example.scw.pojo.entity.Team;
+import com.example.scw.pojo.entity.User;
 import com.example.scw.pojo.exception.ParameterException;
 import com.example.scw.service.TeamService;
 import com.example.scw.utils.TeamConfigUtils;
@@ -13,6 +16,9 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     TeamConfigUtils teamConfigUtils;
 
+    @Autowired
+    TeamMapper teamMapper;
+
     @Override
     public String updateTeamConfig(TeamConfigDto teamConfigDto) throws ParameterException {
         if (!teamConfigDto.checkValue())
@@ -24,5 +30,14 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamConfigDto getTeamConfig() {
         return teamConfigUtils.getDto();
+    }
+
+    @Override
+    public Team getTeam(User user) throws ParameterException {
+        Team team = teamMapper.getTeam(user.getUserTeam());
+        if(team == null){
+            throw new ParameterException("该用户暂未加入团队");
+        }
+        return team;
     }
 }

@@ -130,6 +130,8 @@ public class WorkServiceImpl implements WorkService {
         }
     }
 
+
+
     @Override
     public List<TeamWorkDto> getTeamResponse(User user) {
         Team teamFormUser = teamMapper.getTeamOne(user.getUserTeam());
@@ -286,4 +288,16 @@ public class WorkServiceImpl implements WorkService {
         }
         throw new ServerException("服务器运行错误");
     }
+
+    @Override
+    public Comment getCommentedTeamwork(Integer TeamworkId) throws ParameterException {
+        Comment comment=workMapper.getCommentWork(TeamworkId);
+        if(comment == null)
+            throw new ParameterException("错误的团队任务ID");
+        else return comment;
+    }
+
+
+
+
 }

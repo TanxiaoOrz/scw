@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.scw.pojo.entity.Team;
 import com.example.scw.pojo.exception.AuthorityException;
 import com.example.scw.pojo.exception.ParameterException;
 import org.springframework.beans.factory.InitializingBean;
@@ -63,6 +64,8 @@ public class UserServiceImpl implements UserService, InitializingBean {
         }
         throw new AuthorityException("错误的登录用户类型");
     }
+
+
 
     private String getTokenFromUser(User user) {
         Calendar instance = Calendar.getInstance();

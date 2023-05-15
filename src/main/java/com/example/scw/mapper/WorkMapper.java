@@ -1,9 +1,6 @@
 package com.example.scw.mapper;
 
-import com.example.scw.pojo.entity.Comment;
-import com.example.scw.pojo.entity.SingleWork;
-import com.example.scw.pojo.entity.StudyWork;
-import com.example.scw.pojo.entity.TeamWork;
+import com.example.scw.pojo.entity.*;
 import com.sun.source.doctree.CommentTree;
 import org.apache.ibatis.annotations.*;
 
@@ -20,8 +17,16 @@ public interface WorkMapper {
             " EndTime=#{endTime}, ResourceRoute=#{resourceRoute}, Status=#{status} where WorkId = #{workId}")
     Integer modifyStudyWork(StudyWork studyWork);
 
+
+    @Select("select * from scw.comment where BelongTeamWork = #{TeamWorkId} and status =1")
+    Comment getCommentWork(@Param("TeamWorkId")Integer TeamWorkId);
+
+
     @Select("select * from study_work where WorkId = #{WorkId}")
     StudyWork getStudyWork(@Param("WorkId")Integer workId);
+
+
+
 
     @Select("select * from study_work")
     List<StudyWork> getStudyWorkAll();
@@ -62,12 +67,12 @@ public interface WorkMapper {
     Integer updateSingleWorkDescription(@Param("SingleWorkId")Integer id,@Param("WorkDescription")String description);
 
     @Update("update single_work set ProductionRoute = #{ProductionRoute}, Status = 0 where SingleWorkId = #{SingleWorkId}")
-    Integer updateSingleWorkProSave(@Param("SingleWorkId")Integer id,@Param("WorkDescription")String description);
+    Integer updateSingleWorkProSave(@Param("SingleWorkId")Integer id,@Param("ProductionRoute")String production);
 
     @Update("update single_work set ProductionRoute = #{ProductionRoute},Status = 1 where SingleWorkId = #{SingleWorkId}")
     Integer updateSingleWorkProCommit(@Param("SingleWorkId")Integer id,@Param("ProductionRoute")String production);
 
-    @Update("update team_work set WorkDescription = #{workDescription},ProductionRoute = #{productionRoute},Status = #{Status} where TeamWorkId = #{teamWorkId}")
+    @Update("update team_work set WorkDescription = #{workDescription},ProductionRoute = #{productionRoute},Status = #{status} where TeamWorkId = #{teamWorkId}")
     Integer updateTeamWork(TeamWork teamWork);
 
     @Insert("insert into comment (BelongTeamWork,status) values (#{TeamWorkId},0)")
@@ -78,4 +83,6 @@ public interface WorkMapper {
 
     @Update("update comment set Description = #{description}, score = #{score}, status = #{status} where BelongTeamWork = #{belongTeamWork}")
     Integer updateComment(Comment comment);
+
+
 }

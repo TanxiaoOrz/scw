@@ -15,7 +15,7 @@ public class TeamWork implements PojoCheck, ToCreateNotification {
     @ApiModelProperty(value = "任务描述")
     String workDescription;
     @ApiModelProperty(value = "成果提交的访问路径")
-    String production;
+    String productionRoute;
     @ApiModelProperty(value = "从属队伍id")
     Integer belongTeam;
     @ApiModelProperty(value = "从属学习任务id")
@@ -39,12 +39,12 @@ public class TeamWork implements PojoCheck, ToCreateNotification {
         this.workDescription = workDescription;
     }
 
-    public String getProduction() {
-        return production;
+    public String getProductionRoute() {
+        return productionRoute;
     }
 
-    public void setProduction(String production) {
-        this.production = production;
+    public void setProductionRoute(String productionRoute) {
+        this.productionRoute = productionRoute;
     }
 
     public Integer getBelongTeam() {
@@ -87,7 +87,7 @@ public class TeamWork implements PojoCheck, ToCreateNotification {
     @Override
     public String createNotificationString() throws DataException {
         if (status == 1)
-            return String.format("团队%d的学习任务%d已完成提交请批阅，成果下载路径%s",belongTeam,belongWork,production);
+            return String.format("团队%d的学习任务%d已完成提交请批阅，成果下载路径%s",belongTeam,belongWork,productionRoute);
         else
             throw new DataException("错误的团队任务状态码调用生成通知");
     }
