@@ -19,7 +19,7 @@ public class SingleWorkDto extends SingleWork {
         setWorkDescription(singleWork.getWorkDescription());
         setBelongWork(singleWork.getBelongWork());
         setBelongStudent(singleWork.getBelongStudent());
-        setProductionRoute(singleWork.getWorkDescription());
+        setProductionRoute(singleWork.getProductionRoute());
         setStatus(singleWork.getStatus());
     }
 
