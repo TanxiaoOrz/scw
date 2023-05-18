@@ -291,7 +291,7 @@ public class WorkServiceImpl implements WorkService {
 
     @Override
     public Comment getCommentedTeamwork(Integer TeamworkId) throws ParameterException {
-        Comment comment=workMapper.getCommentWork(TeamworkId);
+        Comment comment=workMapper.getComment(TeamworkId);
         if(comment == null)
             throw new ParameterException("错误的团队任务ID");
         else return comment;
