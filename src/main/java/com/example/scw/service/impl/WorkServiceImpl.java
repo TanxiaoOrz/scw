@@ -253,7 +253,8 @@ public class WorkServiceImpl implements WorkService {
                 integer = workMapper.updateTeamWork(teamWork);
                 if (integer==1) {
                     notificationCreateUtils.createNotification(teamWork, userMapper.getTeacher());
-                    workMapper.newComment(teamWork.getTeamWorkId());
+                    if (workMapper.getComment(teamWork.getTeamWorkId())==null)
+                        workMapper.newComment(teamWork.getTeamWorkId());
                     return "修改发布成功";
                 }
                 break;
