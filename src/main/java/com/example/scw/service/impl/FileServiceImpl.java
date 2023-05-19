@@ -35,11 +35,11 @@ public class FileServiceImpl implements FileService {
         int i = 0;
         while(file.exists()){
             i++;
-            String[] split = multipartFile.getOriginalFilename().split(".");
+            String[] split = multipartFile.getOriginalFilename().split("\\.");
             StringBuilder name=new StringBuilder();
-            String style=split[1];
+            String style=split[split.length-1];
             for (int j=0;j<split.length-1;j++)
-                name.append(split[i]);
+                name.append(split[j]);
             file = new File(dir,name+"(" +i+")"+style);
         }
         file.createNewFile();
